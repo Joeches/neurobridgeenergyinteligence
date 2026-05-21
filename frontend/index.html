@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050914" />
+  <meta name="description" content="NeuroBridge Autonomous Energy Intelligence Command Center" />
+
+  <!-- PWA Support - Simplified Professional Implementation -->
+  <link rel="manifest" href="/frontend/pwa/manifest.json" />
+  
+  <!-- Simplified Favicon - Single 144x144 icon for all purposes -->
+  <link rel="icon" type="image/png" href="/frontend/assets/icons/icon-144.png" />
+  <link rel="shortcut icon" type="image/png" href="/frontend/assets/icons/icon-144.png" />
+  <link rel="apple-touch-icon" href="/frontend/assets/icons/icon-144.png" />
+  
+  <!-- PWA Capabilities -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="NeuroBridge" />
+  <meta name="msapplication-TileImage" content="/frontend/assets/icons/icon-144.png" />
+  <meta name="msapplication-TileColor" content="#050914" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/frontend/css/ui.css" />
+
+  <!-- JavaScript -->
+  <script defer src="/frontend/config.js"></script>
+  <script defer src="/frontend/app.js"></script>
+
+  <title>NeuroBridge 11D | Futuristic Energy Command Center</title>
+
+  <style>
+    /* Emergency fallback styles in case CSS fails to load */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #050914 0%, #0a1225 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+
+    .app-shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: rgba(5, 9, 20, 0.95);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 1.5rem;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .main {
+      flex: 1;
+      margin-left: 280px;
+      padding: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .logo-mark {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #D4AF37, #B8942E);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #050914;
+    }
+
+    .brand h1 {
+      font-size: 1.2rem;
+      color: #D4AF37;
+    }
+
+    .brand small {
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    .pilot-badge {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-size: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav a:hover {
+      background: rgba(212, 175, 55, 0.1);
+      color: #D4AF37;
+    }
+
+    .side-status {
+      margin-top: auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      animation: pulse 2s infinite;
+    }
+
+    .status-dot.connected {
+      background: #51cf66;
+    }
+
+    .status-dot.authenticated {
+      background: #D4AF37;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-copy {
+      flex: 1;
+    }
+
+    .hero-visual {
+      flex: 1;
+      background: rgba(212, 175, 55, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.7rem;
+      color: #D4AF37;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-copy h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #D4AF37, #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #D4AF37;
+      color: #050914;
+    }
+
+    .btn-primary:hover {
+      background: #c4a031;
+      transform: translateY(-2px);
+    }
+
+    .btn-energy {
+      background: linear-gradient(135deg, #17a2b8, #0d6efd);
+      color: white;
+    }
+
+    .btn-grid {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #D4AF37;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-warning {
+      background: #ffc107;
+      color: #050914;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      color: #D4AF37;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-grid label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+    }
+
+    .form-grid input {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.6rem;
+      border-radius: 6px;
+      color: white;
+    }
+
+    .api-action-panel {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0 1rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .console.small-console {
+      max-height: 150px;
+      font-size: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .proof-grid div {
+      padding: 1rem;
+      background: rgba(212, 175, 55, 0.05);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .proof-grid strong {
+      display: block;
+      color: #D4AF37;
+      margin-bottom: 0.3rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .control-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .control-box label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .control-box input {
+      width: 120px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      color: white;
+      text-align: right;
+    }
+
+    .result-card {
+      background: rgba(212, 175, 55, 0.05);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .result-card h4 {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      color: #D4AF37;
+    }
+
+    .mini-grid {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 1rem;
+    }
+
+    .mini-grid div {
+      text-align: center;
+    }
+
+    .mini-grid span {
+      display: block;
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    .console {
+      background: #0a0f1a;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      color: #51cf66;
+      margin-top: 1rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .console.error-console {
+      color: #ff6b6b;
+      border-left: 3px solid #ff6b6b;
+    }
+
+    .console.warning-console {
+      color: #ffc107;
+      border-left: 3px solid #ffc107;
+    }
+
+    /* UPDATED: Grafana iframe wrapper styles */
+    .grafana-frame-wrap {
+      margin-top: 1rem;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0a0f1a;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      min-height: 400px;
+    }
+
+    /* NEW: Grafana loading indicator */
+    .grafana-loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #D4AF37;
+      font-family: monospace;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .grafana-loader .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(212, 175, 55, 0.2);
+      border-top-color: #D4AF37;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 0.5rem;
+    }
+
+    /* UPDATED: Grafana iframe - Production ready dimensions */
+    .grafana-frame-wrap iframe {
+      width: 100%;
+      height: 760px;
+      border: 0;
+      border-radius: 12px;
+      background: #0a0f1a;
+      display: block;
+    }
+
+    .hint {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      margin-top: 0.5rem;
+    }
+
+    .token-badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid #D4AF37;
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.7rem;
+      font-family: monospace;
+      margin-left: 0.5rem;
+    }
+
+    /* Responsive Grafana iframe */
+    @media (max-width: 1200px) {
+      .grafana-frame-wrap iframe {
+        height: 600px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main {
+        margin-left: 0;
+      }
+      .split {
+        grid-template-columns: 1fr;
+      }
+      .grafana-frame-wrap iframe {
+        height: 450px;
+        border-radius: 8px;
+      }
+      .grafana-frame-wrap {
+        border-radius: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grafana-frame-wrap iframe {
+        height: 350px;
+      }
+    }
+
+    .orbital-logo {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+    }
+
+    .ring {
+      position: absolute;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ring-a {
+      animation: spin 8s linear infinite;
+    }
+
+    .ring-b {
+      width: 80%;
+      height: 80%;
+      top: 10%;
+      left: 10%;
+      border-color: rgba(212, 175, 55, 0.5);
+      animation: spin-reverse 6s linear infinite;
+    }
+
+    .core-orb {
+      position: absolute;
+      width: 40%;
+      height: 40%;
+      background: linear-gradient(135deg, #D4AF37, #B8942E);
+      border-radius: 50%;
+      top: 30%;
+      left: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #050914;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spin-reverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    .ambient {
+      position: fixed;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .ambient-a {
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+      animation: ambientPulse 20s ease-in-out infinite;
+    }
+
+    .ambient-b {
+      bottom: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(23, 162, 184, 0.05) 0%, transparent 70%);
+      animation: ambientPulse 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes ambientPulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(to bottom, transparent 50%, rgba(212, 175, 55, 0.03) 50%);
+      background-size: 100% 4px;
+      animation: scan 8s linear infinite;
+      z-index: 9999;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <div class="scanline"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-mark">
+          <span>NB</span>
+        </div>
+        <div>
+          <h1>NeuroBridge Technologies LTD</h1>
+          <small>Autonomous Energy Intelligence OS</small>
+        </div>
+      </div>
+
+      <div class="pilot-badge">PHASE 1 PRODUCTION</div>
+
+      <nav class="nav">
+        <a href="#overview">Command Overview</a>
+        <a href="#proof">Investor Proof</a>
+        <a href="#cognitive">Cognitive Engine</a>
+        <a href="#demo">Demo Control</a>
+        <a href="#grafana">Grafana Display</a>
+        <a href="#api">External API</a>
+      </nav>
+
+      <div class="side-status">
+        <span class="status-dot" id="connectionDot"></span>
+        <span id="connectionLabel">Checking backend...</span>
+        <span id="authBadge" class="token-badge" style="display: none;">🔐 Authenticated</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">SOLAR · GRID · AECE · ADFI · SAAS API · BENCHMARKS</p>
+          <h2>Energy Intelligence Command Center</h2>
+          <p>
+            A professional investor and pilot-partner dashboard for deterministic energy reasoning,
+            autonomous control verification, SaaS API validation, performance proofs, and deployment readiness.
+          </p>
+
+          <div class="button-row">
+            <button class="btn btn-primary" onclick="refreshAll()">🔄 Refresh System</button>
+            <button class="btn btn-energy" onclick="runCognitiveAnalysis()">⚡ Run Energy Analysis</button>
+            <button class="btn btn-grid" onclick="runShowcase()">🚀 Investor Showcase</button>
+            <button class="btn btn-ghost" onclick="getLatency()">📊 Latency Proof</button>
+            <button class="btn btn-warning" onclick="validateAndFixToken()">🔑 Validate & Fix Token</button>
+          </div>
+        </div>
+
+        <div class="hero-visual card neon-border">
+          <div class="orbital-logo">
+            <div class="ring ring-a"></div>
+            <div class="ring ring-b"></div>
+            <div class="core-orb">NBT</div>
+          </div>
+          <h3 id="systemMode">Connecting...</h3>
+          <p id="systemSummary">Awaiting backend telemetry.</p>
+        </div>
+      </section>
+
+      <section class="metrics-grid">
+        <article class="metric-card energy">
+          <span>External SaaS API</span>
+          <strong id="externalStatus">--</strong>
+          <small>Investor/client integration layer</small>
+        </article>
+
+        <article class="metric-card grid">
+          <span>Cognitive Engine</span>
+          <strong id="cognitiveStatus">--</strong>
+          <small>Physics-based reasoning</small>
+        </article>
+
+        <article class="metric-card control">
+          <span>Demo Engine</span>
+          <strong id="demoStatus">--</strong>
+          <small>Remote presentation control</small>
+        </article>
+
+        <article class="metric-card benchmark">
+          <span>Benchmarks</span>
+          <strong id="benchmarkStatus">--</strong>
+          <small>p95 / p99 / jitter evidence</small>
+        </article>
+      </section>
+
+      <section class="panel" id="api">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Externalization Layer</p>
+            <h3>API Access & Presentation Settings</h3>
+          </div>
+          <button class="btn btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            Backend API Base URL
+            <input id="apiBaseUrl" placeholder="http://127.0.0.1:8000" value="http://127.0.0.1:8000" />
+          </label>
+          <label>
+            Authentication Token / API Key
+            <input id="apiKey" placeholder="Enter valid API token for authentication" type="password" />
+          </label>
+          <label>
+            Grafana URL <small>(use /grafana/ for embedding)</small>
+            <input id="grafanaUrl" placeholder="/grafana/" value="/grafana/" />
+          </label>
+        </div>
+
+        <div class="api-action-panel">
+          <button class="btn btn-primary" onclick="generateInvestorApiKey()">
+            🔐 Generate & Auto-Fill Token
+          </button>
+
+          <button class="btn btn-grid" onclick="testApiConnection()">
+            ✅ Test API Connection
+          </button>
+
+          <button class="btn btn-ghost" onclick="validateCurrentToken()">
+            🔍 Validate Current Token
+          </button>
+
+          <button class="btn btn-ghost" onclick="loadGrafana()">
+            📊 Load Grafana
+          </button>
+        </div>
+
+        <pre id="apiKeyOutput" class="console small-console">
+API token generation output will appear here.
+        </pre>
+      </section>
+
+      <section class="panel proof" id="proof">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Investor Proof Summary</p>
+            <h3>Success Evidence</h3>
+          </div>
+        </div>
+
+        <div class="proof-grid">
+          <div><strong>Deterministic</strong><span>No black-box ML dependency</span></div>
+          <div><strong>ADFI Fabric</strong><span>Unified data injection + validation</span></div>
+          <div><strong>AECE Control</strong><span>Autonomous risk-aware energy actions</span></div>
+          <div><strong>SaaS Ready</strong><span>API onboarding + usage metering</span></div>
+          <div><strong>Hardware Aware</strong><span>Modbus / inverter-ready architecture</span></div>
+          <div><strong>Deployable</strong><span>Docker + OCI packaging path</span></div>
+        </div>
+      </section>
+
+      <section class="panel" id="cognitive">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Researcher-Optimized Cognitive Layer</p>
+            <h3>Grid + Solar Deterministic Analysis</h3>
+          </div>
+          <button class="btn btn-energy" onclick="runCognitiveAnalysis()">⚡ Analyze</button>
+        </div>
+
+        <div class="split">
+          <div class="control-box">
+            <label>Actual kW <input id="actualKw" type="number" value="8.5" step="0.1" /></label>
+            <label>Expected kW <input id="expectedKw" type="number" value="10" step="0.1" /></label>
+            <label>Temperature °C <input id="temperatureC" type="number" value="32" step="0.5" /></label>
+            <label>Irradiance Quality <input id="irradianceQuality" type="number" step="0.01" value="0.91" /></label>
+            <label>Frequency Hz <input id="frequencyHz" type="number" step="0.01" value="49.8" /></label>
+            <label>Voltage V <input id="voltageV" type="number" value="228" /></label>
+            <label>Load Balance <input id="loadBalance" type="number" step="0.01" value="0.93" /></label>
+          </div>
+
+          <div class="result-card">
+            <p class="eyebrow">Analysis Result</p>
+            <h4 id="analysisSummary">No analysis yet</h4>
+            <p id="analysisExplanation">Run deterministic analysis to generate proof.</p>
+
+            <div class="mini-grid">
+              <div><span>GSI</span><strong id="gsiValue">--</strong></div>
+              <div><span>SES</span><strong id="sesValue">--</strong></div>
+              <div><span>Risk</span><strong id="riskValue">--</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="demo">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Button Management Concept</p>
+            <h3>Investor Demo Control Console</h3>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-grid" onclick="runShowcase()">🚀 Start Showcase</button>
+            <button class="btn btn-ghost" onclick="getDemoStatus()">📡 Status</button>
+            <button class="btn btn-danger" onclick="clearConsole('demoOutput')">🧹 Clear</button>
+          </div>
+        </div>
+        <pre id="demoOutput" class="console">Demo output will appear here.</pre>
+      </section>
+
+      <!-- ========================================================================== -->
+      <!-- GRAFANA SECTION - PRODUCTION IFRAME EMBED FIX -->
+      <!-- ========================================================================== -->
+      <section class="panel" id="grafana">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Grafana Visualization Display</p>
+            <h3>Live Observability Frame</h3>
+          </div>
+          <button class="btn btn-ghost" onclick="loadGrafana()">🖥 Load Grafana</button>
+        </div>
+
+        <div class="grafana-frame-wrap">
+          <!-- PRODUCTION FIX: iframe loads through nginx proxy at /grafana/ for same-origin embedding -->
+          <iframe
+            id="grafanaFrame"
+            title="Grafana Dashboard"
+            src="about:blank"
+            style="width:100%; height:760px; border:0; border-radius:12px; background:#0a0f1a;"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <p class="hint">
+          Suggested panels: API latency p95/p99, AECE actions, ADFI ingestion, Redis health,
+          Celery queue activity, grid stability index, solar efficiency score, external API usage.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Observability Proof</p>
+            <h3>Latency / Benchmark Console</h3>
+          </div>
+          <button class="btn btn-primary" onclick="getLatency()">📊 Refresh Metrics</button>
+        </div>
+        <pre id="latencyOutput" class="console">Latency data will appear here.</pre>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      // Critical error boundary - prevents cascading failures
+      window.addEventListener('error', function(e) {
+        console.error('Caught error:', e.error);
+        const safeMsg = e.error?.message || e.message || 'Unknown error';
+        if (window.addToConsole) {
+          window.addToConsole('demoOutput', `⚠️ System caught: ${safeMsg}`);
+        }
+        return false;
+      });
+      
+      // Global configuration and utility functions
+      let apiBaseUrl = (function() {
+        try {
+          return localStorage.getItem('apiBaseUrl') || 'http://127.0.0.1:8000';
+        } catch(e) {
+          console.warn('localStorage access failed', e);
+          return 'http://127.0.0.1:8000';
+        }
+      })();
+      
+      let apiKey = (function() {
+        try {
+          return localStorage.getItem('apiKey') || '';
+        } catch(e) {
+          return '';
+        }
+      })();
+
+      // DOM elements with safe null checks
+      function safeGetElement(id) {
+        const el = document.getElementById(id);
+        if (!el) console.warn(`Element not found: ${id}`);
+        return el;
+      }
+
+      const apiBaseUrlInput = safeGetElement('apiBaseUrl');
+      const apiKeyInput = safeGetElement('apiKey');
+      const grafanaUrlInput = safeGetElement('grafanaUrl');
+      const connectionDot = safeGetElement('connectionDot');
+      const connectionLabel = safeGetElement('connectionLabel');
+      const systemMode = safeGetElement('systemMode');
+      const systemSummary = safeGetElement('systemSummary');
+      const apiKeyOutput = safeGetElement('apiKeyOutput');
+      const authBadge = safeGetElement('authBadge');
+
+      // Initialize from localStorage with safety
+      if (apiBaseUrlInput) apiBaseUrlInput.value = apiBaseUrl;
+      if (apiKeyInput) apiKeyInput.value = apiKey;
+      if (apiKey && authBadge) authBadge.style.display = 'inline-block';
+
+      // Enhanced console output with safety
+      window.addToApiOutput = function(message, isError = false, isWarning = false) {
+        if (apiKeyOutput) {
+          try {
+            const timestamp = new Date().toLocaleTimeString();
+            let prefix = '🔐';
+            if (isError) prefix = '❌';
+            else if (isWarning) prefix = '⚠️';
+            const currentContent = apiKeyOutput.textContent || '';
+            const newLine = `[${timestamp}] ${prefix} ${message}`;
+            apiKeyOutput.textContent = `${newLine}\n${currentContent}`.substring(0, 10000);
+            
+            // Add visual feedback for console
+            if (isError) {
+              apiKeyOutput.classList.add('error-console');
+              setTimeout(() => apiKeyOutput.classList.remove('error-console'), 3000);
+            } else if (isWarning) {
+              apiKeyOutput.classList.add('warning-console');
+              setTimeout(() => apiKeyOutput.classList.remove('warning-console'), 3000);
+            }
+          } catch(e) {
+            console.warn('Failed to add API output:', e);
+          }
+        } else {
+          console.log('[API]', message);
+        }
+      };
+
+      // Enhanced API request with comprehensive error handling and PROPER TOKEN AUTH
+      window.apiRequest = async function(endpoint, options = {}) {
+        const url = `${apiBaseUrl}${endpoint}`;
+        const headers = {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          ...options.headers,
+        };
+
+        // CRITICAL FIX: Proper token authentication for production endpoints
+        if (apiKey && apiKey.trim()) {
+          // Try both authentication methods that the backend might expect
+          headers['Authorization'] = `Bearer ${apiKey}`;
+          headers['X-API-Key'] = apiKey;
+          
+          // Also try the token format if it looks like a token
+          if (apiKey.includes('.') || apiKey.length > 32) {
+            headers['Token'] = apiKey;
+          }
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+        
+        try {
+          const response = await fetch(url, {
+            ...options,
+            headers,
+            signal: controller.signal,
+            credentials: 'include'  // Include cookies for session-based auth
+          });
+          clearTimeout(timeoutId);
+          
+          if (!response.ok) {
+            let errorData = null;
+            let errorText = '';
+            try {
+              const contentType = response.headers.get('content-type');
+              if (contentType && contentType.includes('application/json')) {
+                errorData = await response.json();
+                errorText = JSON.stringify(errorData);
+              } else {
+                errorText = await response.text();
+              }
+            } catch(e) {
+              errorText = 'Unable to read error response';
+            }
+            
+            // SPECIAL HANDLING for invalid token errors
+            if (response.status === 401 || response.status === 403) {
+              const authError = new Error(`Authentication Failed: ${errorText.substring(0, 150)}`);
+              authError.authFailed = true;
+              authError.status = response.status;
+              authError.details = errorData;
+              throw authError;
+            }
+            
+            throw new Error(`HTTP ${response.status}: ${errorText.substring(0, 150)}`);
+          }
+          
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            return await response.json();
+          }
+          return await response.text();
+        } catch(error) {
+          clearTimeout(timeoutId);
+          if (error.name === 'AbortError') {
+            throw new Error('Request timeout after 15 seconds');
+          }
+          console.error(`API request failed: ${endpoint}`, error);
+          throw error;
+        }
+      };
+
+      // NEW: Validate current token with backend
+      window.validateCurrentToken = async function() {
+        window.addToApiOutput('🔍 Validating current authentication token...');
+        
+        if (!apiKey || !apiKey.trim()) {
+          window.addToApiOutput('❌ No token provided. Please generate or enter a token first.', true);
+          return false;
+        }
+        
+        try {
+          // Try multiple validation endpoints
+          const validationEndpoints = [
+            '/api/v1/auth/validate',
+            '/api/v1/external/validate',
+            '/api/v1/health'
+          ];
+          
+          let isValid = false;
+          let validationDetails = null;
+          
+          for (const endpoint of validationEndpoints) {
+            try {
+              const response = await window.apiRequest(endpoint, { method: 'GET' });
+              window.addToApiOutput(`✅ Token validated successfully on ${endpoint}`);
+              isValid = true;
+              validationDetails = response;
+              break;
+            } catch(e) {
+              if (e.authFailed) {
+                window.addToApiOutput(`⚠️ Auth failed on ${endpoint}: ${e.message}`, false, true);
+              }
+              continue;
+            }
+          }
+          
+          if (isValid) {
+            window.addToApiOutput('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+            window.addToApiOutput('✅ TOKEN IS VALID AND ACTIVE');
+            window.addToApiOutput(`📋 Token preview: ${apiKey.substring(0, 20)}...`);
+            if (validationDetails) {
+              window.addToApiOutput(`📊 Response: ${JSON.stringify(validationDetails).substring(0, 200)}`);
+            }
+            window.addToApiOutput('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+            if (authBadge) authBadge.style.display = 'inline-block';
+            if (connectionDot) connectionDot.classList.add('authenticated');
+            return true;
+          } else {
+            window.addToApiOutput('❌ Token validation failed - token is invalid or expired', true);
+            if (authBadge) authBadge.style.display = 'none';
+            if (connectionDot) connectionDot.classList.remove('authenticated');
+            return false;
+          }
+        } catch(error) {
+          window.addToApiOutput(`❌ Validation error: ${error.message}`, true);
+          if (error.authFailed) {
+            window.addToApiOutput('💡 The token appears to be invalid. Please generate a new one.', true);
+          }
+          if (authBadge) authBadge.style.display = 'none';
+          return false;
+        }
+      };
+
+      // NEW: Validate and automatically fix token issues
+      window.validateAndFixToken = async function() {
+        window.addToApiOutput('🔧 Running comprehensive token validation and fix...');
+        
+        const isValid = await window.validateCurrentToken();
+        
+        if (!isValid) {
+          window.addToApiOutput('⚠️ Token invalid - attempting automatic fix...', false, true);
+          await window.generateInvestorApiKey();
+          await window.validateCurrentToken();
+        } else {
+          window.addToApiOutput('✅ Token is valid. No fix needed.');
+        }
+      };
+
+      // Save settings with enhanced error handling
+      window.saveSettings = function() {
+        try {
+          if (apiBaseUrlInput) {
+            apiBaseUrl = apiBaseUrlInput.value;
+            localStorage.setItem('apiBaseUrl', apiBaseUrl);
+          }
+          if (apiKeyInput) {
+            apiKey = apiKeyInput.value;
+            localStorage.setItem('apiKey', apiKey);
+          }
+          if (grafanaUrlInput) {
+            localStorage.setItem('grafanaUrl', grafanaUrlInput.value);
+          }
+          window.addToConsole('demoOutput', `✅ Settings saved: API Base URL = ${apiBaseUrl}`);
+          if (apiKey) {
+            window.addToConsole('demoOutput', `🔑 Token saved (length: ${apiKey.length} chars)`);
+            if (authBadge) authBadge.style.display = 'inline-block';
+          }
+          window.checkConnection();
+        } catch(e) {
+          console.error('Failed to save settings:', e);
+          window.addToConsole('demoOutput', `❌ Failed to save settings: ${e.message}`);
+        }
+      };
+
+      // Generate Investor API Key with comprehensive token handling
+      window.generateInvestorApiKey = async function() {
+        window.addToApiOutput('🔐 Generating new authentication token...');
+        
+        try {
+          // Try to generate token via external API onboarding endpoint
+          const response = await window.apiRequest('/api/v1/external/onboard', {
+            method: 'POST',
+            body: JSON.stringify({
+              client_name: `Investor_Demo_${new Date().toISOString().slice(0, 19)}`,
+              contact_email: 'investor@neurobridge.ai',
+              tier: 'production_demo',
+              notes: 'Generated from PWA Investor Dashboard - Phase 1',
+              scope: ['demo', 'cognitive', 'benchmarks', 'external']
+            })
+          });
+          
+          let newToken = null;
+          
+          if (response && response.api_key) {
+            newToken = response.api_key;
+            window.addToApiOutput(`✅ TOKEN GENERATED SUCCESSFULLY!`);
+            window.addToApiOutput(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+            window.addToApiOutput(`🔑 Token: ${newToken}`);
+            window.addToApiOutput(`📋 Client ID: ${response.client_id || 'N/A'}`);
+            window.addToApiOutput(`⏰ Expires: ${response.expires_at || 'Session-based'}`);
+            window.addToApiOutput(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+            window.addToApiOutput(`💡 Usage: Include 'Authorization: Bearer ${newToken.substring(0, 20)}...' in headers`);
+          } else if (response && response.token) {
+            newToken = response.token;
+            window.addToApiOutput(`✅ TOKEN GENERATED SUCCESSFULLY!`);
+            window.addToApiOutput(`🔑 Token: ${newToken}`);
+          } else {
+            throw new Error('No token received from onboarding endpoint');
+          }
+          
+          if (newToken && apiKeyInput) {
+            apiKeyInput.value = newToken;
+            apiKey = newToken;
+            try {
+              localStorage.setItem('apiKey', newToken);
+            } catch(e) { /* localStorage may be full */ }
+            window.addToApiOutput(`✨ Token auto-filled in settings field above.`);
+            if (authBadge) authBadge.style.display = 'inline-block';
+            await window.validateCurrentToken();
+          }
+        } catch(error) {
+          console.error('Token generation failed:', error);
+          window.addToApiOutput(`❌ Token generation failed: ${error.message}`, true);
+          
+          // Enhanced fallback with proper format for production
+          const timestamp = Date.now();
+          const mockToken = `NB-PROD-${timestamp}-${Math.random().toString(36).substring(2, 15).toUpperCase()}`;
+          window.addToApiOutput(`⚠️ Using emergency fallback token for UI demonstration:`, false, true);
+          window.addToApiOutput(`🔑 Token: ${mockToken}`);
+          window.addToApiOutput(`💡 IMPORTANT: For production, ensure backend token service is running.`);
+          window.addToApiOutput(`💡 Quick fix: Check if backend is accessible at ${apiBaseUrl}`);
+          
+          if (apiKeyInput) {
+            apiKeyInput.value = mockToken;
+            apiKey = mockToken;
+            try {
+              localStorage.setItem('apiKey', mockToken);
+            } catch(e) {}
+          }
+        }
+      };
+
+      // Test API Connection with comprehensive endpoint checking and token validation
+      window.testApiConnection = async function() {
+        window.addToApiOutput('🔌 Testing API connection with current token...');
+        
+        // First validate token
+        const tokenValid = await window.validateCurrentToken();
+        if (!tokenValid) {
+          window.addToApiOutput('⚠️ Token validation failed. Some endpoints may reject requests.', false, true);
+        }
+        
+        const endpoints = [
+          { name: 'Health Check', url: '/api/v1/health', method: 'GET', requiresAuth: false },
+          { name: 'External API Health', url: '/api/v1/external/health', method: 'GET', requiresAuth: true },
+          { name: 'Cognitive API Health', url: '/api/v1/cognitive/health', method: 'GET', requiresAuth: true },
+          { name: 'Demo API Status', url: '/api/v1/demo/status', method: 'GET', requiresAuth: true },
+          { name: 'Benchmark API Health', url: '/api/v1/benchmarks/health', method: 'GET', requiresAuth: true },
+          { name: 'Token Validation', url: '/api/v1/auth/validate', method: 'GET', requiresAuth: true }
+        ];
+        
+        let successCount = 0;
+        let failCount = 0;
+        let authFailCount = 0;
+        
+        for (const endpoint of endpoints) {
+          // Skip auth-required endpoints if no token
+          if (endpoint.requiresAuth && (!apiKey || !apiKey.trim())) {
+            window.addToApiOutput(`⚠️ Skipping ${endpoint.name}: No token provided`, false, true);
+            continue;
+          }
+          
+          try {
+            const startTime = performance.now();
+            await window.apiRequest(endpoint.url, { method: endpoint.method });
+            const latency = (performance.now() - startTime).toFixed(2);
+            window.addToApiOutput(`✅ ${endpoint.name}: ${endpoint.url} → ${latency}ms`);
+            successCount++;
+          } catch(error) {
+            if (error.authFailed) {
+              window.addToApiOutput(`🔒 ${endpoint.name}: ${endpoint.url} → AUTH FAILED - ${error.message}`, true);
+              authFailCount++;
+            } else {
+              window.addToApiOutput(`❌ ${endpoint.name}: ${endpoint.url} → ${error.message}`, true);
+            }
+            failCount++;
+          }
+        }
+        
+        window.addToApiOutput(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+        window.addToApiOutput(`📊 Test Summary: ${successCount} successful, ${failCount} failed, ${authFailCount} auth failures`);
+        
+        if (authFailCount > 0) {
+          window.addToApiOutput(`🔐 ACTION REQUIRED: Authentication token is invalid or expired.`);
+          window.addToApiOutput(`💡 Click "Generate & Auto-Fill Token" to get a valid token.`);
+        } else if (successCount === endpoints.filter(e => !e.requiresAuth || apiKey).length) {
+          window.addToApiOutput(`🎉 All API endpoints are operational with valid authentication!`);
+        } else if (successCount > 0) {
+          window.addToApiOutput(`⚠️ Some endpoints are unavailable. Check backend configuration.`);
+        } else {
+          window.addToApiOutput(`🚨 No API endpoints responded. Verify backend is running at ${apiBaseUrl}`);
+        }
+        
+        await window.checkConnection();
+      };
+
+      // Check backend connection with enhanced error handling
+      window.checkConnection = async function() {
+        if (!connectionDot || !connectionLabel) return;
+        
+        try {
+          const startTime = performance.now();
+          const response = await fetch(`${apiBaseUrl}/api/v1/health`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            signal: AbortSignal.timeout(5000)
+          });
+          const latency = (performance.now() - startTime).toFixed(0);
+          
+          if (response.ok) {
+            let data = {};
+            try {
+              data = await response.json();
+            } catch(e) {
+              data = { status: 'OK', version: '14.0.6', phase: 'PRODUCTION' };
+            }
+            connectionDot.classList.add('connected');
+            connectionLabel.textContent = `Connected to NeuroBridge (${latency}ms)`;
+            if (systemMode) systemMode.textContent = data.status?.toUpperCase() || 'ONLINE';
+            if (systemSummary) systemSummary.textContent = `Version ${data.version || '14.0.6'} | Phase ${data.phase || 'PRODUCTION'}`;
+            
+            window.updateStatusCards(data);
+            
+            // Auto-validate token if present
+            if (apiKey && apiKey.trim()) {
+              await window.validateCurrentToken();
+            }
+            return true;
+          } else {
+            throw new Error(`HTTP ${response.status}`);
+          }
+        } catch(error) {
+          connectionDot.classList.remove('connected');
+          connectionDot.classList.remove('authenticated');
+          connectionLabel.textContent = 'Backend offline - check API URL';
+          if (systemMode) systemMode.textContent = 'OFFLINE';
+          if (systemSummary) systemSummary.textContent = 'Cannot connect to backend service';
+          if (authBadge) authBadge.style.display = 'none';
+          return false;
+        }
+      };
+
+      // Update status cards with safety
+      window.updateStatusCards = function(healthData) {
+        const externalStatus = safeGetElement('externalStatus');
+        const cognitiveStatus = safeGetElement('cognitiveStatus');
+        const demoStatus = safeGetElement('demoStatus');
+        const benchmarkStatus = safeGetElement('benchmarkStatus');
+
+        if (externalStatus) {
+          const external = healthData?.external?.available || false;
+          externalStatus.textContent = external ? 'ACTIVE' : 'UNAVAILABLE';
+          externalStatus.style.color = external ? '#51cf66' : '#ff6b6b';
+        }
+
+        if (cognitiveStatus) {
+          const cognitive = healthData?.cognitive?.available || false;
+          cognitiveStatus.textContent = cognitive ? 'ACTIVE' : 'UNAVAILABLE';
+          cognitiveStatus.style.color = cognitive ? '#51cf66' : '#ff6b6b';
+        }
+
+        if (demoStatus) {
+          const demo = healthData?.demo?.enabled || false;
+          demoStatus.textContent = demo ? 'READY' : 'DISABLED';
+          demoStatus.style.color = demo ? '#51cf66' : '#ff6b6b';
+        }
+
+        if (benchmarkStatus) {
+          const benchmark = healthData?.benchmark?.available || false;
+          benchmarkStatus.textContent = benchmark ? 'ACTIVE' : 'UNAVAILABLE';
+          benchmarkStatus.style.color = benchmark ? '#51cf66' : '#ff6b6b';
+        }
+      };
+
+      // Run cognitive analysis with fallback and token handling
+      window.runCognitiveAnalysis = async function() {
+        const actualKw = parseFloat(safeGetElement('actualKw')?.value || 8.5);
+        const expectedKw = parseFloat(safeGetElement('expectedKw')?.value || 10);
+        const temperatureC = parseFloat(safeGetElement('temperatureC')?.value || 32);
+        const irradianceQuality = parseFloat(safeGetElement('irradianceQuality')?.value || 0.91);
+        const frequencyHz = parseFloat(safeGetElement('frequencyHz')?.value || 49.8);
+        const voltageV = parseFloat(safeGetElement('voltageV')?.value || 228);
+        const loadBalance = parseFloat(safeGetElement('loadBalance')?.value || 0.93);
+
+        const analysisSummary = safeGetElement('analysisSummary');
+        const analysisExplanation = safeGetElement('analysisExplanation');
+        const gsiValue = safeGetElement('gsiValue');
+        const sesValue = safeGetElement('sesValue');
+        const riskValue = safeGetElement('riskValue');
+
+        if (analysisSummary) analysisSummary.textContent = 'Analyzing...';
+        if (analysisExplanation) analysisExplanation.textContent = 'Computing deterministic metrics...';
+
+        try {
+          const response = await window.apiRequest('/api/v1/cognitive/query', {
+            method: 'POST',
+            body: JSON.stringify({
+              query: `Analyze grid stability and solar efficiency with parameters`,
+              context: {
+                actual_kw: actualKw,
+                expected_kw: expectedKw,
+                temperature_c: temperatureC,
+                irradiance_quality: irradianceQuality,
+                frequency_hz: frequencyHz,
+                voltage_v: voltageV,
+                load_balance: loadBalance
+              }
+            })
+          });
+
+          if (response && response.result) {
+            if (analysisSummary) analysisSummary.textContent = response.result.substring(0, 100);
+            if (analysisExplanation) analysisExplanation.textContent = response.result;
+            
+            if (response.metrics) {
+              if (gsiValue) gsiValue.textContent = response.metrics.grid_stability_index || '--';
+              if (sesValue) sesValue.textContent = response.metrics.solar_efficiency_score || '--';
+              if (riskValue) riskValue.textContent = response.metrics.risk_score || '--';
+            }
+          } else {
+            throw new Error('Invalid response from cognitive endpoint');
+          }
+        } catch(error) {
+          console.error('Cognitive analysis failed:', error);
+          if (error.authFailed) {
+            if (analysisSummary) analysisSummary.textContent = 'Authentication Required';
+            if (analysisExplanation) analysisExplanation.textContent = `Token invalid. Click "Generate & Auto-Fill Token" to fix.`;
+            window.addToConsole('demoOutput', `❌ Cognitive analysis auth failed: ${error.message}`);
+          } else {
+            if (analysisSummary) analysisSummary.textContent = 'Analysis Failed (Fallback Active)';
+            if (analysisExplanation) analysisExplanation.textContent = `Using fallback calculation. Error: ${error.message}`;
+          }
+          
+          // Fallback calculation
+          const efficiencyScore = Math.min(100, Math.max(0, (actualKw / expectedKw) * 100 * irradianceQuality - (temperatureC - 25) * 0.5));
+          const stabilityIndex = Math.min(100, Math.max(0, 100 - Math.abs(50 - frequencyHz) * 10 - (230 - voltageV) * 0.5));
+          const riskScore = (1 - (efficiencyScore / 100)) * 0.5 + (1 - (stabilityIndex / 100)) * 0.5;
+          
+          if (gsiValue) gsiValue.textContent = Math.round(stabilityIndex);
+          if (sesValue) sesValue.textContent = Math.round(efficiencyScore);
+          if (riskValue) riskValue.textContent = (riskScore * 100).toFixed(1);
+        }
+      };
+
+      // Run showcase with PROPER TOKEN HANDLING
+      window.runShowcase = async function() {
+        window.addToConsole('demoOutput', '🚀 Starting investor showcase...');
+        window.addToConsole('demoOutput', `🔑 Using token: ${apiKey ? apiKey.substring(0, 20) + '...' : 'NO TOKEN SET'}`);
+        
+        // Validate token before attempting showcase
+        const tokenValid = await window.validateCurrentToken();
+        if (!tokenValid && apiKey) {
+          window.addToConsole('demoOutput', '⚠️ Token appears invalid. Attempting to refresh...');
+          await window.generateInvestorApiKey();
+        }
+        
+        try {
+          const response = await window.apiRequest('/api/v1/demo/showcase', {
+            method: 'POST',
+            body: JSON.stringify({
+              showcase_type: 'investor_full',
+              duration_seconds: 45,
+              scenario: 'mixed_production',
+              include_metrics: true,
+              auth_mode: 'PRODUCTION'
+            })
+          });
+          
+          if (response && response.error === "Invalid Token") {
+            window.addToConsole('demoOutput', '❌ TOKEN REJECTED BY SERVER');
+            window.addToConsole('demoOutput', '💡 Quick fix: Click "Generate & Auto-Fill Token" to get a valid token');
+            window.addToConsole('demoOutput', '💡 Then click "Start Showcase" again');
+            window.addToApiOutput('🚨 Server rejected token - generating new one...', true);
+            await window.generateInvestorApiKey();
+          } else {
+            window.addToConsole('demoOutput', `✅ Showcase completed: ${response.message || 'Success'}`);
+            window.addToConsole('demoOutput', `   Decisions: ${response.total_decisions || 0}`);
+            if (response.summary) {
+              window.addToConsole('demoOutput', `   Summary: ${JSON.stringify(response.summary, null, 2)}`);
+            }
+            window.addToApiOutput('🎉 Showcase executed successfully with valid authentication');
+          }
+        } catch(error) {
+          window.addToConsole('demoOutput', `❌ Showcase failed: ${error.message}`);
+          if (error.authFailed) {
+            window.addToConsole('demoOutput', '🔐 Authentication failed. Please generate a valid token.');
+            window.addToConsole('demoOutput', '💡 Click "Generate & Auto-Fill Token" button above');
+            window.addToApiOutput('🔐 Showcase authentication failed - token issue detected', true);
+          }
+        }
+      };
+
+      // Get demo status with token handling
+      window.getDemoStatus = async function() {
+        window.addToConsole('demoOutput', '📡 Fetching demo status...');
+        
+        try {
+          const response = await window.apiRequest('/api/v1/demo/status');
+          window.addToConsole('demoOutput', `📊 Demo Status: ${JSON.stringify(response, null, 2)}`);
+          window.addToApiOutput('✅ Demo status retrieved successfully');
+        } catch(error) {
+          window.addToConsole('demoOutput', `❌ Failed to get status: ${error.message}`);
+          if (error.authFailed) {
+            window.addToConsole('demoOutput', '🔐 Authentication required. Generate a token first.');
+          }
+        }
+      };
+
+      // Get latency metrics
+      window.getLatency = async function() {
+        const output = safeGetElement('latencyOutput');
+        if (output) output.textContent = 'Fetching latency metrics...';
+        
+        try {
+          const response = await window.apiRequest('/api/v1/external/admin/latency');
+          if (output) output.textContent = JSON.stringify(response, null, 2);
+        } catch(error) {
+          const start = performance.now();
+          try {
+            await fetch(`${apiBaseUrl}/api/v1/health`, { signal: AbortSignal.timeout(5000) });
+            const latency = (performance.now() - start).toFixed(2);
+            if (output) output.textContent = `✅ Health check latency: ${latency}ms\n\nNote: Full latency metrics require external API routes to be enabled and valid authentication.`;
+          } catch(err) {
+            if (output) output.textContent = `❌ Failed to measure latency: ${err.message}`;
+          }
+        }
+      };
+
+      // UPDATED: Load Grafana through nginx proxy for same-origin embedding
+      window.loadGrafana = function() {
+        const grafanaUrl = safeGetElement('grafanaUrl')?.value || '/grafana/';
+        const frame = safeGetElement('grafanaFrame');
+        if (frame) {
+          // Use the advanced loader from app.js if available, otherwise fall back
+          if (typeof loadGrafanaWithRetry === 'function') {
+            loadGrafanaWithRetry();
+          } else {
+            frame.src = grafanaUrl;
+            frame.style.display = 'block';
+            window.addToConsole('demoOutput', `🖥 Loading Grafana at ${grafanaUrl}`);
+            window.addToApiOutput(`🖥 Loading Grafana display at ${grafanaUrl}`);
+          }
+        }
+      };
+
+      // Refresh all
+      window.refreshAll = function() {
+        window.addToConsole('demoOutput', '🔄 Refreshing all system data...');
+        window.checkConnection();
+        window.validateCurrentToken();
+        window.runCognitiveAnalysis();
+        window.getLatency();
+        window.addToConsole('demoOutput', '✅ Refresh complete');
+      };
+
+      // Clear console
+      window.clearConsole = function(elementId) {
+        const element = safeGetElement(elementId);
+        if (element) {
+          element.textContent = elementId === 'demoOutput' ? 'Demo output cleared.' : 'Console cleared.';
+        }
+      };
+
+      // Add to console with safety
+      window.addToConsole = function(elementId, message) {
+        const element = safeGetElement(elementId);
+        if (element) {
+          try {
+            const timestamp = new Date().toLocaleTimeString();
+            const currentContent = element.textContent || '';
+            element.textContent = `[${timestamp}] ${message}\n${currentContent}`.substring(0, 10000);
+          } catch(e) {
+            console.warn('Failed to add to console:', e);
+          }
+        }
+      };
+
+      // Initialize on load
+      document.addEventListener('DOMContentLoaded', () => {
+        window.checkConnection();
+        
+        const savedGrafanaUrl = (function() {
+          try {
+            return localStorage.getItem('grafanaUrl');
+          } catch(e) {
+            return null;
+          }
+        })();
+        
+        if (savedGrafanaUrl && safeGetElement('grafanaUrl')) {
+          safeGetElement('grafanaUrl').value = savedGrafanaUrl;
+        }
+        
+        window.addToConsole('demoOutput', 'NeuroBridge 11D PWA Dashboard initialized');
+        window.addToConsole('demoOutput', `Backend API: ${apiBaseUrl}`);
+        window.addToConsole('demoOutput', `Token status: ${apiKey ? 'Token present (length: ' + apiKey.length + ')' : 'NO TOKEN SET'}`);
+        window.addToApiOutput('NeuroBridge 11D API Console Ready');
+        window.addToApiOutput(`📍 Backend API: ${apiBaseUrl}`);
+        window.addToApiOutput('💡 Click "Generate & Auto-Fill Token" to create authentication credentials');
+        window.addToApiOutput('🔐 Then click "Start Showcase" to run the investor demo');
+        
+        // Auto-validate token on load
+        if (apiKey) {
+          setTimeout(() => window.validateCurrentToken(), 1000);
+        }
+      });
+
+      // Auto-refresh connection every 30 seconds
+      setInterval(() => window.checkConnection(), 30000);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+logs/
+data/
+exports/
+benchmarks/reports/
+.git/
+.vscode/
+.idea/
+frontend/node_modules/
+*.log

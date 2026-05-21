@@ -1,0 +1,19 @@
+{
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "C:/Users/hp/AppData/Local/Programs/Python/Python311/include",
+        "C:/Users/hp/AppData/Local/Programs/Python/Python311/Lib/site-packages/pybind11/include",
+        "C:/Users/hp/Desktop/energy-kernel/venv/Lib/site-packages/pybind11/include"
+    ],
+    "C_Cpp.default.compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.h": "cpp",
+        "*.hpp": "cpp"
+    },
+    "python.linting.enabled": false,
+    "cmake.sourceDirectory": "C:/Users/hp/Desktop/energy-kernel/core"
+}

@@ -1,0 +1,52 @@
+{
+  "info": {
+    "name": "NeuroBridge 11D External API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "api_key",
+      "value": "PASTE_API_KEY_HERE"
+    }
+  ],
+  "item": [
+    {
+      "name": "External Health",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/v1/external/health"
+      }
+    },
+    {
+      "name": "Onboard Client",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{base_url}}/api/v1/external/onboard",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Investor Test\",\"organization\":\"Demo Capital\",\"email\":\"investor@example.com\",\"plan\":\"investor_demo\",\"use_case\":\"remote validation\"}"
+        }
+      }
+    },
+    {
+      "name": "External Cognitive Query",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "X-API-Key", "value": "{{api_key}}"}
+        ],
+        "url": "{{base_url}}/api/v1/external/cognitive/query",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"query\":\"Analyze grid stability and solar risk\",\"metrics\":{\"actual_kw\":8.5,\"expected_kw\":10,\"temperature_c\":32,\"irradiance_quality\":0.91,\"frequency_hz\":49.8,\"voltage_v\":228,\"load_balance\":0.93}}"
+        }
+      }
+    }
+  ]
+}

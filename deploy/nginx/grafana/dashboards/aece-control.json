@@ -1,0 +1,19 @@
+{
+  "title": "AECE Autonomous Control",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "AECE Actions",
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 8 },
+      "targets": [
+        {
+          "expr": "neurobridge_aece_actions_total"
+        }
+      ]
+    }
+  ]
+}

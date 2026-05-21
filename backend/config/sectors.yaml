@@ -1,0 +1,25 @@
+sectors:
+  renewables:
+    base_energy: 150.0
+    entropy_factor: 0.05
+    optimization_factor: 1.2
+  oil_gas:
+    base_energy: 100.0
+    entropy_factor: 0.05
+    optimization_factor: 0.9
+  grid_storage:
+    base_energy: 80.0
+    entropy_factor: 0.05
+    optimization_factor: 1.0
+  quantum_optimization:
+    base_energy: 120.0
+    entropy_factor: 0.05
+    optimization_factor: 1.5
+  defense:
+    base_energy: 90.0
+    entropy_factor: 0.05
+    optimization_factor: 0.95
+  nuclear:
+    base_energy: 160.0
+    entropy_factor: 0.05
+    optimization_factor: 1.1

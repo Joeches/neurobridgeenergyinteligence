@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>NeuroBridge 11D | Service Temporarily Unavailable</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #030711;
+            --panel: rgba(255, 255, 255, 0.07);
+            --text: #f4fbff;
+            --muted: #9eb4ca;
+            --energy: #16f2c4;
+            --grid: #58a6ff;
+            --risk: #ff5470;
+            --line: rgba(255, 255, 255, 0.13);
+        }
+
+        body {
+            background: linear-gradient(135deg, #030711, #091323 45%, #02040a);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background Effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(22, 242, 196, 0.08), transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(88, 166, 255, 0.06), transparent 45%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Scanline Effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(22, 242, 196, 0.02) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+            animation: scan 12s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .error-container {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-card {
+            background: rgba(3, 7, 17, 0.85);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(22, 242, 196, 0.25);
+            border-radius: 32px;
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(22, 242, 196, 0.1);
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--risk), #ff8ca0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            margin-bottom: 16px;
+            letter-spacing: -4px;
+        }
+
+        .error-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .error-message {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .error-details {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 32px;
+            text-align: left;
+            border: 1px solid var(--line);
+        }
+
+        .error-details p {
+            color: var(--muted);
+            font-size: 14px;
+            margin: 8px 0;
+            font-family: 'SF Mono', 'Courier New', monospace;
+        }
+
+        .error-details .label {
+            color: var(--energy);
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .retry-info {
+            color: var(--grid);
+            font-size: 13px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .retry-timer {
+            background: rgba(88, 166, 255, 0.15);
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--grid);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 40px;
+            padding: 12px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--energy), #8affea);
+            color: #02110e;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(22, 242, 196, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--line);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--energy);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: rgba(158, 180, 202, 0.6);
+            text-align: center;
+        }
+
+        .pulse {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--risk);
+            margin-right: 8px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Orbital decoration */
+        .orbital {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(22, 242, 196, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .orbital::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--energy);
+            border-radius: 50%;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--energy);
+        }
+
+        @media (max-width: 640px) {
+            .error-card {
+                padding: 32px 24px;
+            }
+            .error-code {
+                font-size: 80px;
+            }
+            .error-title {
+                font-size: 22px;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="orbital"></div>
+    <div class="error-container">
+        <div class="error-card">
+            <div class="error-code">50x</div>
+            <div class="error-title">Service Temporarily Unavailable</div>
+            <div class="error-message">
+                The NeuroBridge 11D service is currently unavailable. This is usually temporary and will resolve shortly.
+            </div>
+
+            <div class="error-details">
+                <p><span class="label">🔄 Status:</span> Service restarting or recovering</p>
+                <p><span class="label">⚡ Phase:</span> PHASE_1_PRODUCTION</p>
+                <p><span class="label">🔧 Action:</span> Our systems are automatically recovering</p>
+            </div>
+
+            <div class="retry-info">
+                <span class="pulse"></span>
+                <span>Auto-retry in <span id="countdown">10</span> seconds</span>
+                <span class="retry-timer" id="retryStatus">Checking service...</span>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="retryNow()">
+                    🔄 Retry Now
+                </button>
+                <a href="/" class="btn btn-secondary">
+                    🏠 Return to Dashboard
+                </a>
+                <a href="/api/docs" class="btn btn-secondary">
+                    📚 API Documentation
+                </a>
+            </div>
+
+            <div class="footer">
+                NeuroBridge Technologies Ltd | Phase 1 Production | <span id="timestamp"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let countdown = 10;
+        let timerInterval;
+        let retryAttempts = 0;
+        const maxRetries = 5;
+        const retryDelay = 2000;
+
+        function updateTimestamp() {
+            const now = new Date();
+            const timestampEl = document.getElementById('timestamp');
+            if (timestampEl) {
+                timestampEl.textContent = now.toLocaleString();
+            }
+        }
+
+        function updateRetryStatus(message, isError = false) {
+            const statusEl = document.getElementById('retryStatus');
+            if (statusEl) {
+                statusEl.textContent = message;
+                statusEl.style.color = isError ? '#ff5470' : '#58a6ff';
+            }
+        }
+
+        async function checkServiceHealth() {
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                
+                const response = await fetch('/api/v1/health', {
+                    signal: controller.signal,
+                    cache: 'no-store'
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    updateRetryStatus('✓ Service is ready! Redirecting...');
+                    return true;
+                }
+                updateRetryStatus('⚠️ Service not ready yet');
+                return false;
+            } catch (err) {
+                updateRetryStatus('⏳ Waiting for service...');
+                return false;
+            }
+        }
+
+        async function retryNow() {
+            updateRetryStatus('🔄 Checking service status...');
+            const isReady = await checkServiceHealth();
+            
+            if (isReady) {
+                window.location.href = '/';
+            } else {
+                updateRetryStatus('⚠️ Service not ready, retrying...');
+                startCountdown();
+            }
+        }
+
+        function startCountdown() {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            countdown = 10;
+            const countdownEl = document.getElementById('countdown');
+            
+            timerInterval = setInterval(async () => {
+                countdown--;
+                if (countdownEl) countdownEl.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(timerInterval);
+                    updateRetryStatus('🔄 Checking service...');
+                    const isReady = await checkServiceHealth();
+                    
+                    if (isReady) {
+                        updateRetryStatus('✓ Service ready! Redirecting...');
+                        setTimeout(() => {
+                            window.location.href = '/';
+                        }, 500);
+                    } else {
+                        retryAttempts++;
+                        if (retryAttempts < maxRetries) {
+                            startCountdown();
+                        } else {
+                            updateRetryStatus('⚠️ Service taking longer than expected', true);
+                            countdownEl.textContent = '--';
+                        }
+                    }
+                }
+            }, 1000);
+        }
+
+        // Initialize page
+        updateTimestamp();
+        setInterval(updateTimestamp, 1000);
+        startCountdown();
+
+        // Also check immediately on page load
+        setTimeout(() => {
+            checkServiceHealth();
+        }, 1000);
+    </script>
+</body>
+</html>

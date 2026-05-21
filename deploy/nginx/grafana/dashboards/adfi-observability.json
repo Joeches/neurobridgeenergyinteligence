@@ -1,0 +1,19 @@
+{
+  "title": "ADFI Observability",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Grid Risk Events",
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 8 },
+      "targets": [
+        {
+          "expr": "neurobridge_grid_risk_events_total"
+        }
+      ]
+    }
+  ]
+}

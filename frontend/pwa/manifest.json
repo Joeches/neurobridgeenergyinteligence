@@ -1,0 +1,30 @@
+{
+  "name": "NeuroBridge 11D Energy Intelligence",
+  "short_name": "NeuroBridge",
+  "description": "Autonomous Energy Intelligence Command Center for deterministic energy reasoning, telemetry validation, and external SaaS API testing.",
+  "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "theme_color": "#050914",
+  "background_color": "#050914",
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/frontend/assets/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/frontend/assets/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
